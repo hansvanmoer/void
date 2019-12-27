@@ -16,27 +16,15 @@
  *
  */
 
-mod config;
-mod galaxy;
-mod map;
-mod system;
-mod vector;
-
-use config::Config;
-
-use log::info;
+/*
+ * Contains a vector struct and associated functions
+ */
 
 /**
- * Application entry point
+ * A 2D vector type
  */
-fn main() {
-    let mut config = Config::new();
-    config.load();
-    simple_logger::init_with_level(config.verbosity()).unwrap();
-    info!("application started");
-
-    let galaxy = map::create_galaxy();
-    println!("{:?}", &galaxy);
+#[derive(Debug, PartialEq)]
+pub struct Vector{
+    pub x: f64,
+    pub y: f64
 }
-
-

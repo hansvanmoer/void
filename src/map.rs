@@ -16,27 +16,25 @@
  *
  */
 
-mod config;
-mod galaxy;
-mod map;
-mod system;
-mod vector;
-
-use config::Config;
-
-use log::info;
-
 /**
- * Application entry point
+ * All objects and functions related to the game map
  */
-fn main() {
-    let mut config = Config::new();
-    config.load();
-    simple_logger::init_with_level(config.verbosity()).unwrap();
-    info!("application started");
 
-    let galaxy = map::create_galaxy();
-    println!("{:?}", &galaxy);
+use crate::galaxy::{Galaxy, GalaxyBuilder};
+use crate::system::{System, SystemBuilder};
+
+use std::rc::Rc;
+use std::cell::RefCell;
+
+pub fn create_galaxy() -> Rc<RefCell<Galaxy>>{
+    let mut builder = GalaxyBuilder::new();
+    for _i in 0..1 {
+	builder.add_system(create_system());
+    }
+    builder.done()
 }
 
-
+fn create_system() -> Rc<RefCell<System>>{
+    let mut builder = SystemBuilder::new(0.0, 0.0);
+    builder.done()
+}

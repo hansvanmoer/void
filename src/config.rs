@@ -1,4 +1,4 @@
-/**
+/*
  * This file is part of Void.
  *
  * Void is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@
 use clap::{App, Arg};
 use log::Level;
 
-/*
+/**
  * Struct holding all application configuration
  */
 pub struct Config{
@@ -28,13 +28,16 @@ pub struct Config{
 
 impl Config{
 
-    /*
+    /**
      * Creates a new configuration object
      */
     pub fn new() -> Config{
 	Config{verbosity: Level::Info}
     }
 
+    /**
+     * Loads configuration from the environment
+     */
     pub fn load(& mut self){
 	let matches = App::new("void")
 	    .about("a space game")
@@ -54,6 +57,9 @@ impl Config{
 	};
     }
 
+    /**
+     * Returns the verbosity
+     */
     pub fn verbosity(& self) -> Level{
 	self.verbosity
     }
